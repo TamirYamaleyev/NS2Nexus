@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import PlayerInfo from "./PlayerInfo";
-import PlayerPerformance from "./PlayerPerformance";
-import PlayerStats from "./PlayerStats";
-import RoundList from "./RoundList";
+import PlayerInfo from "./PageParts/PlayerInfo";
+import PlayerPerformance from "./PageParts/PlayerPerformance";
+import PlayerStats from "./PageParts/PlayerStats";
+import RoundList from "./PageParts/RoundList";
 
 export default function PlayerPage() {
     const { playerId } = useParams();

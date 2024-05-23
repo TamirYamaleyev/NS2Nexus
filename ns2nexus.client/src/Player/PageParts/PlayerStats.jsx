@@ -1,5 +1,4 @@
-import React from 'react';
-import SecondaryStatBox from './SecondaryStatBox';
+import SecondaryStatBox from '../Components/SecondaryStatBox';
 
 const PlayerStats = ({ playerStats }) => (
     <div>

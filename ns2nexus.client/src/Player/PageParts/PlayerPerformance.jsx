@@ -1,4 +1,5 @@
-import StatBox from './StatBox';
+import PropTypes from 'prop-types';
+import StatBox from '../Components/StatBox';
 
 const PlayerPerformance = ({ playerStats }) => (
     <div>
@@ -26,5 +27,20 @@ const PlayerPerformance = ({ playerStats }) => (
         />
     </div>
 );
+
+PlayerPerformance.propTypes = {
+    playerStats: PropTypes.shape({
+        hiveSkill: PropTypes.number,
+        hiveSkillMarine: PropTypes.number,
+        hiveSkillAlien: PropTypes.number,
+        commanderSkill: PropTypes.number,
+        commanderSkillMarine: PropTypes.number,
+        commanderSkillAlien: PropTypes.number,
+        marineAccuracy: PropTypes.number,
+        alienAccuracy: PropTypes.number,
+        marineKdr: PropTypes.number,
+        alienKdr: PropTypes.number
+    }).isRequired
+};
 
 export default PlayerPerformance;

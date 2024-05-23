@@ -1,8 +1,9 @@
+import PropTypes from 'prop-types';
 import { useRef } from 'react';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Fade from '@mui/material/Fade';
-import DropdownButton from './Components/DropdownButton';
+import DropdownButton from '../Components/DropdownButton';
 
 const PlayerInfo = ({ player, toggleDropdown, dropDownOpen }) => {
     const dropdownRef = useRef(null);
@@ -46,6 +47,17 @@ const PlayerInfo = ({ player, toggleDropdown, dropDownOpen }) => {
             </div>
         </div>
     );
+};
+
+PlayerInfo.propTypes = {
+    player: PropTypes.shape({
+        profilePictureUrl: PropTypes.string,
+        name: PropTypes.string,
+        playerName: PropTypes.string,
+        steamId: PropTypes.string
+    }).isRequired,
+    toggleDropdown: PropTypes.func.isRequired,
+    dropDownOpen: PropTypes.bool.isRequired
 };
 
 export default PlayerInfo;
