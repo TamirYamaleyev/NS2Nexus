@@ -135,35 +135,6 @@ const PlayerStats = ({ playerStats, playerRounds, playerClassPlaytime }) => {
                         side="alien"
                     />
                 </Grid>
-
-                {/*<Grid item xs={12} lg={3}>*/}
-                {/*    <SecondaryStatBox*/}
-                {/*        title="Total lifeforms killed"*/}
-                {/*        value={stats.hits}*/}
-                {/*        side="marine"*/}
-                {/*    />*/}
-                {/*</Grid>*/}
-                {/*<Grid item xs={12} lg={3}>*/}
-                {/*    <SecondaryStatBox*/}
-                {/*        title="Marine Accuracy"*/}
-                {/*        value={stats.hits}*/}
-                {/*        side="marine"*/}
-                {/*    />*/}
-                {/*</Grid>*/}
-                {/*<Grid item xs={12} lg={3}>*/}
-                {/*    <SecondaryStatBox*/}
-                {/*        title="Alien Accuracy"*/}
-                {/*        value={stats.hits}*/}
-                {/*        side="alien"*/}
-                {/*    />*/}
-                {/*</Grid>*/}
-                {/*<Grid item xs={12} lg={3}>*/}
-                {/*    <SecondaryStatBox*/}
-                {/*        title="Hive Level"*/}
-                {/*        value={stats.hits}*/}
-                {/*        side="marine"*/}
-                {/*    />*/}
-                {/*</Grid>*/}
             </Grid>
         </div>
     );

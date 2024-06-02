@@ -7,6 +7,7 @@ import PlayerStats from "./PageParts/PlayerStats";
 import RoundList from "./PageParts/RoundList";
 
 export default function PlayerPage() {
+
     const { playerId } = useParams();
     const [player, setPlayer] = useState(null);
     const [playerStats, setPlayerStats] = useState(null);
@@ -70,6 +71,7 @@ export default function PlayerPage() {
             width: 'calc(100% - 200px)',
             zIndex: '1',
             color: 'silver',
+            backgroundColor: '#2D1D3D',
             padding: '20px',
             borderRadius: '15px',
         }}>
@@ -84,7 +86,7 @@ export default function PlayerPage() {
                 <PlayerPerformance playerStats={playerStats} />
                 <PlayerStats playerStats={roundPlayerStats} playerRounds={rounds.$values} playerClassPlaytime={classPlaytime.$values} />
             </div>
-            <RoundList />
+            <RoundList rounds={rounds.$values} />
         </div>
     );
 

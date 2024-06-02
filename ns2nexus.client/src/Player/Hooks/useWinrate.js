@@ -39,5 +39,4 @@ const useWinRate = (playerStats, playerRounds, teamNumber) => {
     };
 };
 
-
 export default useWinRate;
