@@ -4,14 +4,16 @@ namespace NS2Nexus.Server.BLL.Interfaces
 {
     public interface IRoundLogic
     {
+        KillFeed CreateKillFeed(KillFeed newKillFeed);
         RoundInfo CreateRound(RoundInfo newRound);
         RoundPlayerStats CreateRoundPlayerStats(RoundPlayerStats newRoundPlayerStats);
         IEnumerable<RoundInfo> GetAllRounds();
-        IEnumerable<RoundPlayerStats> GetAlPlayerStatsInRound(int roundId);
-        RoundInfo GetRoundById(int roundId);
-        RoundPlayerStats GetRoundPlayerStatsById(int roundId, int playerId);
-        IEnumerable<KillFeed> GetKillFeedsInRound(int roundId);
+        IEnumerable<RoundInfo> GetAllRoundsByPlayerId(int playerId);
+        IEnumerable<RoundPlayerStats> GetAllStatsByPlayer(int playerId);
+        IEnumerable<RoundPlayerStats> GetAllStatsInRound(int roundId);
         KillFeed GetKillFeedById(int id);
-        KillFeed CreateKillFeed(KillFeed killFeed);
+        IEnumerable<KillFeed> GetKillFeedsInRound(int roundId);
+        RoundInfo GetRoundById(int roundId);
+        RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId);
     }
 }

@@ -21,6 +21,13 @@ namespace NS2Nexus.Server.Controllers
             return rounds;
         }
 
+        [HttpGet("Rounds/Player/{id}")]
+        public IEnumerable<RoundInfo> GetRoundsByPlayer(int id)
+        {
+            IEnumerable<RoundInfo> rounds = _roundLogic.GetAllRoundsByPlayerId(id);
+            return rounds;
+        }
+
         [HttpGet("Rounds/{id}")]
         public RoundInfo GetRound(int id)
         {
@@ -38,9 +45,9 @@ namespace NS2Nexus.Server.Controllers
         // <------------ ROUND PLAYER STATS ------------> //
 
         [HttpGet("RoundPlayerStats/{id}")]
-        public RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId)
+        public IEnumerable<RoundPlayerStats> GetRoundPlayerStats(int playerId)
         {
-            RoundPlayerStats rps = _roundLogic.GetRoundPlayerStatsById(roundId, playerId);
+            IEnumerable<RoundPlayerStats> rps = _roundLogic.GetAllStatsByPlayer(playerId);
             return rps;
         }
 

@@ -33,6 +33,30 @@ namespace NS2Nexus.Server.BLL.Logic
                 throw new Exception("Failed to fetch Rounds. Please try again later.");
             }
         }
+        public IEnumerable<RoundInfo> GetAllRoundsByPlayerId(int playerId)
+        {
+            try
+            {
+                var roundIDs = _roundPlayerStatsRepository.GetAll().Where(r => r.PlayerId == playerId).Select(r => r.RoundId).ToList();
+                // Debug: Check if roundIDs list is populated
+                if (!roundIDs.Any())
+                {
+                    throw new Exception("No round IDs found for the given player ID.");
+                }
+
+                var rounds = _roundRepository.GetAll().Where(r => roundIDs.Contains(r.Id)).ToList();
+                if (!roundIDs.Any())
+                {
+                    throw new Exception("No round IDs found for the given player ID.");
+                }
+
+                return rounds;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Rounds by Player. Please try again later.");
+            }
+        }
         public RoundInfo GetRoundById(int roundId)
         {
             try
@@ -66,7 +90,7 @@ namespace NS2Nexus.Server.BLL.Logic
 
         // <------------ ROUND PLAYER STATS ------------> //
 
-        public IEnumerable<RoundPlayerStats> GetAlPlayerStatsInRound(int roundId)
+        public IEnumerable<RoundPlayerStats> GetAllStatsInRound(int roundId)
         {
             try
             {
@@ -78,11 +102,23 @@ namespace NS2Nexus.Server.BLL.Logic
                 throw new Exception("Failed to fetch Players Stats in Round. Please try again later.");
             }
         }
-        public RoundPlayerStats GetRoundPlayerStatsById(int roundId, int playerId)
+        public IEnumerable<RoundPlayerStats> GetAllStatsByPlayer(int playerId)
         {
             try
             {
-                var roundPlayerStats = _roundPlayerStatsRepository.SingleFindBy(rps => rps.RoundId == roundId && rps.PlayerId == playerId);
+                var roundPlayerStats = _roundPlayerStatsRepository.FindBy(rps => rps.PlayerId == playerId);
+                return roundPlayerStats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Round Player Stats. Please try again later");
+            }
+        }
+        public RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId)
+        {
+            try
+            {
+                var roundPlayerStats = _roundPlayerStatsRepository.SingleFindBy(rps => rps.PlayerId == playerId && rps.RoundId == roundId);
                 return roundPlayerStats;
             }
             catch (Exception ex)
@@ -142,7 +178,7 @@ namespace NS2Nexus.Server.BLL.Logic
             try
             {
                 var existingKillFeed = _killFeedRepository.GetSingle(newKillFeed.Id);
-                if ( existingKillFeed == null )
+                if (existingKillFeed == null)
                 {
                     _killFeedRepository.Add(newKillFeed);
                     return newKillFeed;

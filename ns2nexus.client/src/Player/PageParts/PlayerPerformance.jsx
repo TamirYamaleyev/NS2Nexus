@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import StatBox from '../Components/StatBox';
 
 const PlayerPerformance = ({ playerStats }) => (
-    <div>
+    <div style={{ width: '14vw', flexDirection: 'column', alignItems: 'flex-start' }}>
         <StatBox
             title="Skill"
             totalValue={playerStats.hiveSkill}
@@ -22,6 +22,7 @@ const PlayerPerformance = ({ playerStats }) => (
         />
         <StatBox
             title="Kill Death Ratio"
+            totalValue=""
             marineValue={playerStats.marineKdr}
             alienValue={playerStats.alienKdr}
         />

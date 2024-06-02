@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="src\Pages\" />
+    <Folder Include="src\Player\Hooks\" />
     <Folder Include="src\Router\" />
     <Folder Include="src\User\" />
     <Folder Include="src\Round\" />

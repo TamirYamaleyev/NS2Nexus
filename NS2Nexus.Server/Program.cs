@@ -1,9 +1,9 @@
-
 using NS2Nexus.Server.BLL.Interfaces;
 using NS2Nexus.Server.BLL.Logic;
 using NS2Nexus.Server.DAL.Interfaces;
 using NS2Nexus.Server.DAL.Repositories;
 using NS2Nexus.Server.Models;
+using System.Text.Json.Serialization;
 
 namespace NS2Nexus.Server
 {
@@ -40,11 +40,14 @@ namespace NS2Nexus.Server
             builder.Services.AddScoped<IEntityBaseRepository<KillFeed>, EntityBaseRepository<KillFeed>>();
             builder.Services.AddScoped<IEntityBaseRepository<RoundPlayerStats>, EntityBaseRepository<RoundPlayerStats>>();
             builder.Services.AddScoped<IEntityBaseRepository<RoundInfo>, EntityBaseRepository<RoundInfo>>();
-            builder.Services.AddControllers();
 
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            // Configure JSON options to handle cycles
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                    options.JsonSerializerOptions.WriteIndented = true;
+                });
 
             // Configure SSL certificate validation
             builder.Services.AddHttpClient("YourHttpClient")
@@ -66,8 +69,6 @@ namespace NS2Nexus.Server
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
                 app.UseDeveloperExceptionPage();
             }
 
@@ -76,7 +77,6 @@ namespace NS2Nexus.Server
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
