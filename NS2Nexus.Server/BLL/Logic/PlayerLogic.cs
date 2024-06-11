@@ -1,6 +1,7 @@
 ﻿using NS2Nexus.Server.BLL.Interfaces;
 using NS2Nexus.Server.DAL.Interfaces;
 using NS2Nexus.Server.DAL.Repositories;
+using NS2Nexus.Server.Helpers;
 using NS2Nexus.Server.Models;
 using System.Numerics;
 
@@ -19,6 +20,7 @@ namespace NS2Nexus.Server.BLL.Logic
             _playerStatsRepository = playerStatsRepository;
             _classPlaytimeRepository = classPlaytimeRepository;
             this._logger = logger;
+            PlayerParseHelper.ParsePlayer();
         }
 
         // <------------ PLAYERS ------------> //

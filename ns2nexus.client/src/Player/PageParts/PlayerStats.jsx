@@ -49,7 +49,7 @@ const PlayerStats = ({ playerStats, playerRounds, playerClassPlaytime }) => {
     }
 
     return (
-        <div>
+        <>
             <Grid container rowSpacing={4} columnSpacing={4}>
                 <Grid item xs={12} lg={3}>
                     <SecondaryStatBox 
@@ -136,7 +136,7 @@ const PlayerStats = ({ playerStats, playerRounds, playerClassPlaytime }) => {
                     />
                 </Grid>
             </Grid>
-        </div>
+        </>
     );
 };
 

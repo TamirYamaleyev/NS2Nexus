@@ -1,14 +1,18 @@
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
+import Layout from './Layout/Layout'
 import Router from './Router/Router';
+import ThemeProvider from './Providers/ThemeProvider';
 
 function App() {
     return (
-        <div>
-            <BrowserRouter>
-                <Router/>
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <ThemeProvider >
+                <Layout>
+                    <Router />
+                </Layout>
+            </ThemeProvider>
+        </BrowserRouter>
     );
 }
 

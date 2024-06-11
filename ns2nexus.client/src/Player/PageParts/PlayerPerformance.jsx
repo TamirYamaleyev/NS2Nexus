@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
 import StatBox from '../Components/StatBox';
+import Grid from '@mui/material/Grid';
 
 const PlayerPerformance = ({ playerStats }) => (
-    <div style={{ width: '14vw', flexDirection: 'column', alignItems: 'flex-start' }}>
+    <Grid sx={{ width: '20em',
+    flexDirection: 'column', alignItems: 'flex-start' }}>
         <StatBox
             title="Skill"
             totalValue={playerStats.hiveSkill}
@@ -26,7 +28,7 @@ const PlayerPerformance = ({ playerStats }) => (
             marineValue={playerStats.marineKdr}
             alienValue={playerStats.alienKdr}
         />
-    </div>
+    </Grid>
 );
 
 PlayerPerformance.propTypes = {

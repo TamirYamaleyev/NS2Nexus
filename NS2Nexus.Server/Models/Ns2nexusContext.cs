@@ -198,8 +198,10 @@ public partial class Ns2nexusContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Adagrad).HasColumnName("adagrad");
-            entity.Property(e => e.AlienAccuracy).HasColumnName("alienAccuracy");
-            entity.Property(e => e.AlienKdr).HasColumnName("alienKDR");
+            entity.Property(e => e.AlienHits).HasColumnName("alienHits");
+            entity.Property(e => e.AlienMisses).HasColumnName("alienMisses");
+            entity.Property(e => e.AlienKills).HasColumnName("alienKills");
+            entity.Property(e => e.AlienDeaths).HasColumnName("alienDeaths");
             entity.Property(e => e.CommAdagrad).HasColumnName("commAdagrad");
             entity.Property(e => e.CommanderSkill).HasColumnName("commanderSkill");
             entity.Property(e => e.CommanderSkillAlien).HasColumnName("commanderSkillAlien");
@@ -207,8 +209,11 @@ public partial class Ns2nexusContext : DbContext
             entity.Property(e => e.HiveSkill).HasColumnName("hiveSkill");
             entity.Property(e => e.HiveSkillAlien).HasColumnName("hiveSkillAlien");
             entity.Property(e => e.HiveSkillMarine).HasColumnName("hiveSkillMarine");
-            entity.Property(e => e.MarineAccuracy).HasColumnName("marineAccuracy");
-            entity.Property(e => e.MarineKdr).HasColumnName("marineKDR");
+            entity.Property(e => e.MarineHits).HasColumnName("marineHits");
+            entity.Property(e => e.MarineOnosHits).HasColumnName("marineOnosHits");
+            entity.Property(e => e.MarineMisses).HasColumnName("marineMisses");
+            entity.Property(e => e.MarineKills).HasColumnName("marineKills");
+            entity.Property(e => e.MarineDeaths).HasColumnName("marineDeaths");
             entity.Property(e => e.PlayerId).HasColumnName("playerId");
             entity.Property(e => e.PlayerSkillOffset).HasColumnName("playerSkillOffset");
 

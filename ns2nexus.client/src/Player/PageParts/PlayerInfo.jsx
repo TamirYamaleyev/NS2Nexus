@@ -3,10 +3,11 @@ import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Fade from '@mui/material/Fade';
 import DropdownButton from '../Components/DropdownButton';
+import Grid from '@mui/material/Grid';
 
 function PlayerInfo({ player, toggleDropdown, dropDownOpen, dropdownRef }) {
     return (
-        <div
+        <Grid
             style={{
                 position: 'relative',
                 marginBottom: '20px',
@@ -16,11 +17,11 @@ function PlayerInfo({ player, toggleDropdown, dropDownOpen, dropdownRef }) {
             }}
         >
             {player.profilePictureUrl && (
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ width: '150px', marginRight: '10px' }}>
+                <Grid style={{ display: 'flex', alignItems: 'center' }}>
+                    <Grid style={{ width: '150px', marginRight: '10px' }}>
                         <img src={player.profilePictureUrl} alt={player.name} style={{ width: '100%', border: '5px solid white', borderRadius: '5%' }} />
-                    </div>
-                    <div>
+                    </Grid>
+                    <Grid>
                         <p style={{ margin: 20 }}>
                             <span style={{
                                 background: `linear-gradient(90deg, #F0A968, #9B3613)`,
@@ -30,22 +31,22 @@ function PlayerInfo({ player, toggleDropdown, dropDownOpen, dropdownRef }) {
                                 fontSize: '38px'
                             }}>{player.playerName}</span>
                         </p>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
             )}
 
-            <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
-                <div ref={dropdownRef} style={{ width: '4rem', height: '4rem', position: 'relative' }}>
-                    <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '2rem', height: '2rem', borderRadius: '50%', background: 'white' }}>
+            <Grid style={{ position: 'absolute', top: '10px', right: '10px' }}>
+                <Grid ref={dropdownRef} style={{ width: '4rem', height: '4rem', position: 'relative' }}>
+                    <Grid style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', width: '2rem', height: '2rem', borderRadius: '50%', background: 'white' }}>
                         <IconButton onClick={toggleDropdown} style={{ padding: '0', background: 'none', border: 'none', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                             <MoreVertIcon fontSize="medium" style={{ color: 'gray' }} />
                         </IconButton>
-                    </div>
-                </div>
+                    </Grid>
+                </Grid>
 
                 {/* Dropdown Content */}
                 <Fade in={dropDownOpen} timeout={150}>
-                    <div
+                    <Grid
                         style={{
                             position: 'absolute',
                             top: 'calc(85%)',
@@ -70,10 +71,10 @@ function PlayerInfo({ player, toggleDropdown, dropDownOpen, dropdownRef }) {
                             link={`https://www.ensl.org/users/8018`}
                             iconHeight='1.2em'
                         />
-                    </div>
+                    </Grid>
                 </Fade>
-            </div>
-        </div>
+            </Grid>
+        </Grid>
     );
 }
 

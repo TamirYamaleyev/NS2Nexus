@@ -10,13 +10,18 @@ public partial class PlayerStats : IEntityBase
 
     public int PlayerId { get; set; }
 
-    public double? MarineAccuracy { get; set; }
+    public int? MarineHits { get; set; }
+    public int? MarineOnosHits { get; set; }
+    public int? MarineMisses { get; set; }
 
-    public double? AlienAccuracy { get; set; }
+    public int? AlienHits { get; set; }
+    public int? AlienMisses { get; set; }
 
-    public double? MarineKdr { get; set; }
+    public int? MarineKills { get; set; }
+    public int? MarineDeaths { get; set; }
 
-    public double? AlienKdr { get; set; }
+    public int? AlienKills { get; set; }
+    public int? AlienDeaths { get; set; }
 
     public int CommanderSkill { get; set; }
 

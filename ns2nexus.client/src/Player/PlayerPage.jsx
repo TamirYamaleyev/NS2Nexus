@@ -5,6 +5,7 @@ import PlayerInfo from "./PageParts/PlayerInfo";
 import PlayerPerformance from "./PageParts/PlayerPerformance";
 import PlayerStats from "./PageParts/PlayerStats";
 import RoundList from "./PageParts/RoundList";
+import Grid from '@mui/material/Grid';
 
 export default function PlayerPage() {
 
@@ -60,20 +61,21 @@ export default function PlayerPage() {
     }, []);
 
     if (!player || !playerStats || !rounds) {
-        return <div>Loading...</div>;
+        return <Grid>Loading...</Grid>;
     }
 
     return (
-        <div style={{
-            position: 'absolute',
+        <Grid sx={{
+            margin: '0 auto',
+            padding: '3em 5.5em',
             top: '100px',
             left: '100px',
             width: 'calc(100% - 200px)',
             zIndex: '1',
             color: 'silver',
-            backgroundColor: '#2D1D3D',
-            padding: '20px',
             borderRadius: '15px',
+            height: 'auto',
+            minHeight:'100%'
         }}>
             <PlayerInfo
                 player={player}
@@ -81,13 +83,13 @@ export default function PlayerPage() {
                 dropDownOpen={dropDownOpen}
                 dropdownRef={dropdownRef}
             />
+
             <hr style={{ border: '1px solid silver', margin: '20px 0' }} />
-            <div>
-                <PlayerPerformance playerStats={playerStats} />
-                <PlayerStats playerStats={roundPlayerStats} playerRounds={rounds.$values} playerClassPlaytime={classPlaytime.$values} />
-            </div>
+
+            <PlayerPerformance playerStats={playerStats} />
+            <PlayerStats playerStats={roundPlayerStats} playerRounds={rounds.$values} playerClassPlaytime={classPlaytime.$values} />
             <RoundList rounds={rounds.$values} />
-        </div>
+        </Grid>
     );
 
 }

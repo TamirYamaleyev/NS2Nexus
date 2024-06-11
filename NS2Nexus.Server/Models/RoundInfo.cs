@@ -10,9 +10,9 @@ public partial class RoundInfo : IEntityBase
 
     public string ServerName { get; set; } = null!;
 
-    public int MapId { get; set; }
+    public string Map { get; set; } = null!;
 
-    public int GameMode { get; set; }
+    public string GameMode { get; set; } = null!;
 
     public int RoundDate { get; set; }
 
@@ -27,8 +27,6 @@ public partial class RoundInfo : IEntityBase
     public virtual GameModes? GameModeNavigation { get; set; }
 
     public virtual ICollection<KillFeed> KillFeeds { get; set; } = new List<KillFeed>();
-
-    public virtual Maps? Map { get; set; }
 
     public virtual ICollection<RoundPlayerStats> RoundPlayerStats { get; set; } = new List<RoundPlayerStats>();
 }

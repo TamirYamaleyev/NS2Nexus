@@ -36,6 +36,7 @@
       "launchBrowser": true,
       "launchUrl": "",
       "environmentVariables": {
+        "ASPNETCORE_JSON_FILE_DIRECTORY": "C:\\Users\\Wraithling\\Desktop\\NS2NexusRounds\\2024-01-01 14_41_24787.json",
         "ASPNETCORE_ENVIRONMENT": "Development",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.SpaProxy"
       }

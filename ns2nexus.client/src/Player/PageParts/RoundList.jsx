@@ -35,7 +35,7 @@ const RoundList = ({ rounds }) => {
     }
 
     return (
-        <div>
+        <>
             <p style={{ textAlign: 'left' }}>
                 <span style={{
                     background: `linear-gradient(90deg, #F0A968, #9B3613)`,
@@ -76,7 +76,7 @@ const RoundList = ({ rounds }) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-        </div>
+        </>
     );
 };
 
