@@ -1,19 +1,24 @@
-﻿using Microsoft.Extensions.Options;
+﻿using dotenv.net;
+using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json.Linq;
 using NS2Nexus.Server.BLL.Interfaces;
 using NS2Nexus.Server.Models;
 using Sprache;
 using System.Configuration;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace NS2Nexus.Server.Helpers
 {
-    public class PlayerParseHelper
+    public class RoundParseHelper
     {
         public static (List<Player>, List<PlayerStats>, List<RoundPlayerStats>, List<RoundInfo>) ParseFiles()
         {
-            string pathToJson = "C:\\Users\\Wraithling\\Desktop\\NS2NexusRounds";
+            DotEnv.Load();
+
+            string pathToJson = "NS2NexusRounds";
+
             JsonFileReader reader = new JsonFileReader();// Extract JSON data from each file in the directory
             List<JToken> fileList = new List<JToken>();
             

@@ -2,7 +2,9 @@ const ROUTES = {
     ROOT: "/",
     USER: "/user",
     PLAYER: "/player",
-    ROUND: "/round"
+    ROUND: "/round",
+    SIGNUP: "/signup",
+    LOGIN: "/login",
 };
 
 export default ROUTES;

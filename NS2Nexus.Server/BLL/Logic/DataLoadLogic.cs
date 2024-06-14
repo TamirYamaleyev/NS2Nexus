@@ -42,7 +42,7 @@ namespace NS2Nexus.Server.BLL.Logic
 
         public void LoadData()
         {
-            var (playerList, statsList, rpsList, roundList) = PlayerParseHelper.ParseFiles();
+            var (playerList, statsList, rpsList, roundList) = RoundParseHelper.ParseFiles();
 
             // Step 1: Create Players
             CreatePlayers(playerList);

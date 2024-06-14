@@ -9,12 +9,21 @@
     <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist</PublishAssetsDirectory>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="src\Forms\Components\" />
+    <Folder Include="src\Forms\Hooks\" />
+    <Folder Include="src\Forms\Utils\" />
     <Folder Include="src\Layout\" />
+    <Folder Include="src\Components\" />
     <Folder Include="src\Providers\" />
     <Folder Include="src\Pages\" />
     <Folder Include="src\Player\Hooks\" />
     <Folder Include="src\Router\" />
-    <Folder Include="src\User\" />
     <Folder Include="src\Round\" />
+    <Folder Include="src\User\Helpers\InitialForms\" />
+    <Folder Include="src\User\Helpers\Normalization\" />
+    <Folder Include="src\User\Hooks\" />
+    <Folder Include="src\User\Models\" />
+    <Folder Include="src\User\Components\" />
+    <Folder Include="src\User\Providers\" />
   </ItemGroup>
 </Project>
