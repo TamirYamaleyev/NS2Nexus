@@ -6,6 +6,7 @@ import PlayerPerformance from "./PageParts/PlayerPerformance";
 import PlayerStats from "./PageParts/PlayerStats";
 import RoundList from "./PageParts/RoundList";
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 export default function PlayerPage() {
 
@@ -62,10 +63,8 @@ export default function PlayerPage() {
     }, []);
 
     if (!player || !playerStats || !rounds || !roundPlayerStats) {
-        return <Grid>Loading...</Grid>;
+        return <Typography>Loading...</Typography>;
     }
-
-    //console.log(`Player: ${player}\nStats: ${playerStats}\nRPS: ${roundPlayerStats}\nRounds: ${rounds}\nClassPlaytime: ${classPlaytime}\nPlayer Id: ${player.id}`)
 
     return (
         <Grid sx={{

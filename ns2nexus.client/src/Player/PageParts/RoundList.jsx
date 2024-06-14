@@ -101,6 +101,7 @@ const RoundList = ({ rounds, roundPlayerStats }) => {
                                     <Chip
                                         label={determineWinLossStatus(round, getTeamPlayed(round.id, round.winningSide))}
                                         sx={{
+                                            width: '4.5em',
                                             backgroundColor: determineWinLossStatus(round, getTeamPlayed(round.id, round.winningSide)) === 'Win' ? '#dcfce7' : '#fce7f3',
                                             color: determineWinLossStatus(round, getTeamPlayed(round.id, round.winningSide)) === 'Win' ? '#166534' : '#9d174d',
                                         }}

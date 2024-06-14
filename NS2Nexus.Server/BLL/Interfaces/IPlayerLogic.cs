@@ -9,6 +9,7 @@ namespace NS2Nexus.Server.BLL.Interfaces
         PlayerStats EditPlayerStats(int playerId, PlayerStats editedPlayerStats);
         ClassPlaytime EditClassPlaytime(ClassPlaytime editedPlaytime);
         IEnumerable<Player> GetAllPlayers();
+        IEnumerable<Player> GetPlayersByRPS(int id);
         IEnumerable<PlayerStats> GetAllPlayerStats();
         IEnumerable<ClassPlaytime> GetClassPlaytimeById(int playerId);
         Player GetPlayerById(int playerId);

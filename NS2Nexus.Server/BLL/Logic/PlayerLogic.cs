@@ -69,6 +69,19 @@ namespace NS2Nexus.Server.BLL.Logic
                 throw new Exception("Failed to fetch Player. Please try again later.");
             }
         }
+
+        public IEnumerable<Player> GetPlayersByRPS(int id)
+        {
+            try
+            {
+                var players = _playerRepository.FindBy(p => p.Id == id);
+                return players;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Players. Please try again later.");
+            }
+        }
         public Player EditPlayer(Player editedPlayer)
         {
             try

@@ -28,6 +28,13 @@ namespace NS2Nexus.Server.Controllers
             return player;
         }
 
+        [HttpGet("Players/Rps/{id}")]
+        public IEnumerable<Player> GetAllPlayersByRPS(int id)
+        {
+            IEnumerable<Player> players = _playerLogic.GetPlayersByRPS(id);
+            return players;
+        }
+
         [HttpGet("Players/steamid/{steamId}")]
         public Player GetPlayerBySteamId(int steamId)
         {
@@ -64,6 +71,13 @@ namespace NS2Nexus.Server.Controllers
         public IEnumerable<RoundPlayerStats> GetRoundPlayerStats(int id)
         {
             IEnumerable<RoundPlayerStats> rps = _playerLogic.GetAllStatsByPlayer(id);
+            return rps;
+        }
+
+        [HttpGet("Rps/round/{id}")]
+        public IEnumerable<RoundPlayerStats> GetRoundPlayerStatsByRound(int id)
+        {
+            IEnumerable<RoundPlayerStats> rps = _playerLogic.GetAllStatsInRound(id);
             return rps;
         }
 
