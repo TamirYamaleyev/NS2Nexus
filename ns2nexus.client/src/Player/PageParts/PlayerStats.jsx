@@ -5,8 +5,7 @@ import { useEffect } from 'react';
 import useAverage from '../Hooks/useAverage';
 import useWinrate from '../Hooks/useWinrate';
 
-const PlayerStats = ({ playerStats, playerRounds, playerClassPlaytime }) => {
-
+const PlayerStats = ({ playerStats, playerRounds }) => {
     const mSPH = useAverage(playerStats, 'score', 1, 'hours'); // Team 1 represents Marines
     const aSPH = useAverage(playerStats, 'score', 2, 'hours'); // Team 2 represents Aliens
 
@@ -19,24 +18,24 @@ const PlayerStats = ({ playerStats, playerRounds, playerClassPlaytime }) => {
     const mWinrate = useWinrate(playerStats, playerRounds, 1); // Team 1 represents Marines
     const aWinrate = useWinrate(playerStats, playerRounds, 2); // Team 2 represents Aliens
 
-    const getClassText = (classId) => {
-        switch (classId) {
-            case 0:
-                return "Unknown";
-            case 1:
-                return "Skulk";
-            case 2:
-                return "Gorge";
-            case 3:
-                return "Lerk";
-            case 4:
-                return "Fade";
-            case 5:
-                return "Onos";
-            default:
-                return "Unknown";
-        }
-    };
+    //const getClassText = (classId) => {
+    //    switch (classId) {
+    //        case 0:
+    //            return "Unknown";
+    //        case 1:
+    //            return "Skulk";
+    //        case 2:
+    //            return "Gorge";
+    //        case 3:
+    //            return "Lerk";
+    //        case 4:
+    //            return "Fade";
+    //        case 5:
+    //            return "Onos";
+    //        default:
+    //            return "Unknown";
+    //    }
+    //};
 
     useEffect(() => {
         if (!Array.isArray(playerStats) || playerStats.length === 0 || !Array.isArray(playerRounds) || playerRounds.length === 0) {
@@ -50,13 +49,16 @@ const PlayerStats = ({ playerStats, playerRounds, playerClassPlaytime }) => {
 
     return (
         <>
-            <Grid container rowSpacing={4} columnSpacing={4}>
-                <Grid item xs={12} lg={3}>
-                    <SecondaryStatBox 
-                        title="DISCORD"
-                        value="ICON"
-                        side="marine"
-                    />
+            <Grid container rowSpacing={4} columnSpacing={4} marginTop=".5em" marginBottom="1em">
+                <Grid
+                    container
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    rowSpacing={0}
+                    columnSpacing={0}
+                >
+                    
                 </Grid>
                 <Grid item xs={12} lg={3}>
                     <SecondaryStatBox
@@ -128,13 +130,13 @@ const PlayerStats = ({ playerStats, playerRounds, playerClassPlaytime }) => {
                         side="alien"
                     />
                 </Grid>
-                <Grid item xs={12} lg={3}>
-                    <SecondaryStatBox
-                        title="Main Life Form"
-                        value={playerClassPlaytime.length > 0 ? getClassText(playerClassPlaytime[4].classId) : ""}
-                        side="alien"
-                    />
-                </Grid>
+                {/*<Grid item xs={12} lg={3}>*/}
+                {/*    <SecondaryStatBox*/}
+                {/*        title="Main Life Form"*/}
+                {/*        value={playerClassPlaytime.length > 0 ? getClassText(playerClassPlaytime[4].classId) : ""}*/}
+                {/*        side="alien"*/}
+                {/*    />*/}
+                {/*</Grid>*/}
             </Grid>
         </>
     );

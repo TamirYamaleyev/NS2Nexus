@@ -42,22 +42,6 @@ namespace NS2Nexus.Server.Controllers
             return round;
         }
 
-        // <------------ ROUND PLAYER STATS ------------> //
-
-        [HttpGet("RoundPlayerStats/{id}")]
-        public IEnumerable<RoundPlayerStats> GetRoundPlayerStats(int playerId)
-        {
-            IEnumerable<RoundPlayerStats> rps = _roundLogic.GetAllStatsByPlayer(playerId);
-            return rps;
-        }
-
-        [HttpPost("RoundPlayerStats")]
-        public RoundPlayerStats CreateRoundPlayerStats(RoundPlayerStats newRps)
-        {
-            RoundPlayerStats rps = _roundLogic.CreateRoundPlayerStats(newRps);
-            return rps;
-        }
-
         // <------------ KILL FEED ------------> //
 
         [HttpGet("KillFeed/{id}")]

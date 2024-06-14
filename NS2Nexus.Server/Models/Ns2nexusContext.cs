@@ -17,13 +17,9 @@ public partial class Ns2nexusContext : DbContext
 
     public virtual DbSet<ClassPlaytime> ClassPlaytimes { get; set; }
 
-    public virtual DbSet<GameModes> GameModes { get; set; }
-
     public virtual DbSet<KillFeed> KillFeeds { get; set; }
 
     public virtual DbSet<Lifeforms> Lifeforms { get; set; }
-
-    public virtual DbSet<Maps> Maps { get; set; }
 
     public virtual DbSet<Player> Players { get; set; }
 
@@ -73,20 +69,6 @@ public partial class Ns2nexusContext : DbContext
                 .HasForeignKey(d => d.RoundId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__classPlay__round__00200768");
-        });
-
-        modelBuilder.Entity<GameModes>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__gameMode__3213E83FCA0B5D0B");
-
-            entity.ToTable("gameModes");
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.GameModeName)
-                .HasMaxLength(1)
-                .HasColumnName("gameModeName");
         });
 
         modelBuilder.Entity<KillFeed>(entity =>
@@ -149,20 +131,6 @@ public partial class Ns2nexusContext : DbContext
             entity.Property(e => e.LifeformName)
                 .HasMaxLength(1)
                 .HasColumnName("lifeformName");
-        });
-
-        modelBuilder.Entity<Maps>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("PK__maps__3213E83F7B3B0FB3");
-
-            entity.ToTable("maps");
-
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
-            entity.Property(e => e.MapName)
-                .HasMaxLength(1)
-                .HasColumnName("mapName");
         });
 
         modelBuilder.Entity<Player>(entity =>
@@ -233,7 +201,7 @@ public partial class Ns2nexusContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.GameMode).HasColumnName("gameMode");
-            entity.Property(e => e.MapId).HasColumnName("mapId");
+            entity.Property(e => e.Map).HasColumnName("map");
             entity.Property(e => e.PlayedStatus).HasColumnName("playedStatus");
             entity.Property(e => e.RoundDate).HasColumnName("roundDate");
             entity.Property(e => e.RoundLength).HasColumnName("roundLength");
@@ -241,16 +209,6 @@ public partial class Ns2nexusContext : DbContext
                 .HasMaxLength(1)
                 .HasColumnName("serverName");
             entity.Property(e => e.WinningSide).HasColumnName("winningSide");
-
-            entity.HasOne(d => d.GameModeNavigation).WithMany(p => p.RoundInfos)
-                .HasForeignKey(d => d.GameMode)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__roundInfo__gameM__74AE54BC");
-
-            entity.HasOne(d => d.Map).WithMany(p => p.RoundInfos)
-                .HasForeignKey(d => d.MapId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__roundInfo__mapId__73BA3083");
         });
 
         modelBuilder.Entity<RoundPlayerStats>(entity =>
@@ -260,8 +218,9 @@ public partial class Ns2nexusContext : DbContext
             entity.ToTable("roundPlayerStats");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("id");
+                .HasColumnName("id");  // No need for ValueGeneratedNever()
+
+            // Define other properties
             entity.Property(e => e.Assists).HasColumnName("assists");
             entity.Property(e => e.CommanderTime).HasColumnName("commanderTime");
             entity.Property(e => e.Deaths).HasColumnName("deaths");
@@ -278,6 +237,7 @@ public partial class Ns2nexusContext : DbContext
             entity.Property(e => e.TimeBuilding).HasColumnName("timeBuilding");
             entity.Property(e => e.TimePlayed).HasColumnName("timePlayed");
 
+            // Define relationships
             entity.HasOne(d => d.Player).WithMany(p => p.RoundPlayerStats)
                 .HasForeignKey(d => d.PlayerId)
                 .OnDelete(DeleteBehavior.ClientSetNull)

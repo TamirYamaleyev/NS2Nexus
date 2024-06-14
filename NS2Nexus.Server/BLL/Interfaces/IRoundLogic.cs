@@ -6,14 +6,14 @@ namespace NS2Nexus.Server.BLL.Interfaces
     {
         KillFeed CreateKillFeed(KillFeed newKillFeed);
         RoundInfo CreateRound(RoundInfo newRound);
-        RoundPlayerStats CreateRoundPlayerStats(RoundPlayerStats newRoundPlayerStats);
+        //RoundPlayerStats CreateRoundPlayerStats(RoundPlayerStats newRoundPlayerStats);
         IEnumerable<RoundInfo> GetAllRounds();
         IEnumerable<RoundInfo> GetAllRoundsByPlayerId(int playerId);
-        IEnumerable<RoundPlayerStats> GetAllStatsByPlayer(int playerId);
-        IEnumerable<RoundPlayerStats> GetAllStatsInRound(int roundId);
+        //IEnumerable<RoundPlayerStats> GetAllStatsByPlayer(int playerId);
+        //IEnumerable<RoundPlayerStats> GetAllStatsInRound(int roundId);
         KillFeed GetKillFeedById(int id);
         IEnumerable<KillFeed> GetKillFeedsInRound(int roundId);
         RoundInfo GetRoundById(int roundId);
-        RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId);
+        //RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId);
     }
 }

@@ -1,11 +1,15 @@
 ﻿using NS2Nexus.Server.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace NS2Nexus.Server.Models;
 
 public partial class RoundPlayerStats : IEntityBase
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public int RoundId { get; set; }

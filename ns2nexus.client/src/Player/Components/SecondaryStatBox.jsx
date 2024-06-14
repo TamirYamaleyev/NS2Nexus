@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { grey, blueGrey } from '@mui/material/colors';
 
 const SecondaryStatBox = ({ title, value, side }) => {
     const valueColor = side === 'alien' ? 'orange' : 'lightBlue';
@@ -19,14 +18,14 @@ const SecondaryStatBox = ({ title, value, side }) => {
                 <Grid item>
                     <Box
                         sx={{
-                            width: '40px',
+                            width: '54px',
                             padding: '1vh',
-                            bgcolor: blueGrey[900],
+                            bgcolor: '#3d2e63',
                             borderTopLeftRadius: '.5em',
                             borderBottomLeftRadius: '.5em'
                         }}
                     >
-                        <Typography variant="subtitle2" color={valueColor}>{value}</Typography>
+                        <Typography align="center" variant="subtitle2" color={valueColor}>{value}</Typography>
                     </Box>
                 </Grid>
                 <Grid item>
@@ -34,12 +33,12 @@ const SecondaryStatBox = ({ title, value, side }) => {
                         sx={{
                             width: '260px',
                             padding: '1vh',
-                            bgcolor: grey[600],
+                            bgcolor: '#594d75',
                             borderTopRightRadius: '.5em',
                             borderBottomRightRadius: '.5em'
                         }}
                     >
-                        <Typography variant="subtitle2" color='white'>{title}</Typography>
+                        <Typography variant="subtitle2" color='#f3f4f6'>{title}</Typography>
                     </Box>
                 </Grid>
             </Grid>

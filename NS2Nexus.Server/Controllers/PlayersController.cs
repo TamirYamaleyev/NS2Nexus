@@ -35,13 +35,6 @@ namespace NS2Nexus.Server.Controllers
             return player;
         }
 
-        [HttpPost("Players")]
-        public Player CreatePlayer([FromBody] Player newPlayer)
-        {
-            Player player = _playerLogic.CreatePlayer(newPlayer);
-            return player;
-        }
-
         [HttpPut("Players")]
         public Player EditPlayer([FromBody] Player updatedPlayer)
         {
@@ -58,19 +51,28 @@ namespace NS2Nexus.Server.Controllers
             return playerStats;
         }
 
-        [HttpPost("Stats")]
-        public PlayerStats CreateStats([FromBody] PlayerStats newStats)
-        {
-            PlayerStats stats = _playerLogic.CreatePlayerStats(newStats);
-            return stats;
-        }
-
         [HttpPut("Stats/{id}")]
         public PlayerStats EditStats([FromBody] PlayerStats updatedStats, int id)
         {
             PlayerStats statsToUpdate = _playerLogic.EditPlayerStats(updatedStats.PlayerId, updatedStats);
             return statsToUpdate;
         }
+
+        // <------------ ROUND PLAYER STATS ------------> //
+
+        [HttpGet("Rps/{id}")]
+        public IEnumerable<RoundPlayerStats> GetRoundPlayerStats(int id)
+        {
+            IEnumerable<RoundPlayerStats> rps = _playerLogic.GetAllStatsByPlayer(id);
+            return rps;
+        }
+
+        //[HttpPost("RoundPlayerStats")]
+        //public RoundPlayerStats CreateRoundPlayerStats(RoundPlayerStats newRps)
+        //{
+        //    RoundPlayerStats rps = _playerLogic.CreateRoundPlayerStats(newRps);
+        //    return rps;
+        //}
 
         // <------------ CLASS PLAYTIME ------------> //
 

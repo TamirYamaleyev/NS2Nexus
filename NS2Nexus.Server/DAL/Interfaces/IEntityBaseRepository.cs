@@ -1,4 +1,6 @@
-﻿using System.Linq.Expressions;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
+using System.Linq.Expressions;
 
 namespace NS2Nexus.Server.DAL.Interfaces
 {
@@ -24,5 +26,14 @@ namespace NS2Nexus.Server.DAL.Interfaces
 
         // Updates an entity.
         bool Edit(T entity);
+
+        // Runs an SQL command.
+        void ExecuteSqlCommand(string sql, params object[] args);
+
+        // Starts a DB Transaction
+        public IDbContextTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted);
+
+        // Truncates an entity's table.
+        //void DeleteAll();
     }
 }

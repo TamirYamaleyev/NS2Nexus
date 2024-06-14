@@ -9,8 +9,8 @@ export default function Main({ children }) {
             <Box
                 sx={{
                     minHeight: "100vh",
-                    backgroundColor: theme.palette.mode === 'dark' ? "#2D1D3D" : "#2D1D3D",
-                    color: theme.palette.text.primary
+                    backgroundColor: theme.palette.mode === 'dark' ? "#2e1b40" : "#1c0b2e",
+                    color: '#FFFFFF'
                 }}
             >
                 {children}

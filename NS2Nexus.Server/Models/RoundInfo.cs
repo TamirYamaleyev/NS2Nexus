@@ -24,8 +24,6 @@ public partial class RoundInfo : IEntityBase
 
     public virtual ICollection<ClassPlaytime> ClassPlaytimes { get; set; } = new List<ClassPlaytime>();
 
-    public virtual GameModes? GameModeNavigation { get; set; }
-
     public virtual ICollection<KillFeed> KillFeeds { get; set; } = new List<KillFeed>();
 
     public virtual ICollection<RoundPlayerStats> RoundPlayerStats { get; set; } = new List<RoundPlayerStats>();

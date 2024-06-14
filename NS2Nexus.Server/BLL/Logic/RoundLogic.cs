@@ -54,6 +54,7 @@ namespace NS2Nexus.Server.BLL.Logic
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.Message);
                 throw new Exception("Failed to fetch Rounds by Player. Please try again later.");
             }
         }
@@ -88,62 +89,62 @@ namespace NS2Nexus.Server.BLL.Logic
             }
         }
 
-        // <------------ ROUND PLAYER STATS ------------> //
+        //// <------------ ROUND PLAYER STATS ------------> //
 
-        public IEnumerable<RoundPlayerStats> GetAllStatsInRound(int roundId)
-        {
-            try
-            {
-                var roundPlayerStats = _roundPlayerStatsRepository.FindBy(rps => rps.RoundId == roundId);
-                return roundPlayerStats;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to fetch Players Stats in Round. Please try again later.");
-            }
-        }
-        public IEnumerable<RoundPlayerStats> GetAllStatsByPlayer(int playerId)
-        {
-            try
-            {
-                var roundPlayerStats = _roundPlayerStatsRepository.FindBy(rps => rps.PlayerId == playerId);
-                return roundPlayerStats;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to fetch Round Player Stats. Please try again later");
-            }
-        }
-        public RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId)
-        {
-            try
-            {
-                var roundPlayerStats = _roundPlayerStatsRepository.SingleFindBy(rps => rps.PlayerId == playerId && rps.RoundId == roundId);
-                return roundPlayerStats;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to fetch Round Player Stats. Please try again later");
-            }
-        }
-        public RoundPlayerStats CreateRoundPlayerStats(RoundPlayerStats newRoundPlayerStats)
-        {
-            try
-            {
-                var existingRoundPlayerStats = _roundPlayerStatsRepository.SingleFindBy
-                    (rps => rps.RoundId == newRoundPlayerStats.RoundId && rps.PlayerId == newRoundPlayerStats.PlayerId);
+        //public IEnumerable<RoundPlayerStats> GetAllStatsInRound(int roundId)
+        //{
+        //    try
+        //    {
+        //        var roundPlayerStats = _roundPlayerStatsRepository.FindBy(rps => rps.RoundId == roundId);
+        //        return roundPlayerStats;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Failed to fetch Players Stats in Round. Please try again later.");
+        //    }
+        //}
+        //public IEnumerable<RoundPlayerStats> GetAllStatsByPlayer(int playerId)
+        //{
+        //    try
+        //    {
+        //        var roundPlayerStats = _roundPlayerStatsRepository.FindBy(rps => rps.PlayerId == playerId);
+        //        return roundPlayerStats;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Failed to fetch Round Player Stats. Please try again later");
+        //    }
+        //}
+        //public RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId)
+        //{
+        //    try
+        //    {
+        //        var roundPlayerStats = _roundPlayerStatsRepository.SingleFindBy(rps => rps.PlayerId == playerId && rps.RoundId == roundId);
+        //        return roundPlayerStats;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Failed to fetch Round Player Stats. Please try again later");
+        //    }
+        //}
+        //public RoundPlayerStats CreateRoundPlayerStats(RoundPlayerStats newRoundPlayerStats)
+        //{
+        //    try
+        //    {
+        //        var existingRoundPlayerStats = _roundPlayerStatsRepository.SingleFindBy
+        //            (rps => rps.RoundId == newRoundPlayerStats.RoundId && rps.PlayerId == newRoundPlayerStats.PlayerId);
 
-                if (existingRoundPlayerStats == null)
-                {
-                    _roundPlayerStatsRepository.Add(newRoundPlayerStats);
-                }
-                throw new Exception("This Player's Stats in this Round already exists.");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to create Round Player Stats. Please try again later.");
-            }
-        }
+        //        if (existingRoundPlayerStats == null)
+        //        {
+        //            _roundPlayerStatsRepository.Add(newRoundPlayerStats);
+        //        }
+        //        throw new Exception("This Player's Stats in this Round already exists.");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception("Failed to create Round Player Stats. Please try again later.");
+        //    }
+        //}
 
         // <------------ KILL FEED ------------> //
 

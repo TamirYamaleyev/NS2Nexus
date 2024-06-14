@@ -1,4 +1,8 @@
-﻿using NS2Nexus.Server.BLL.Interfaces;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.IdentityModel.Tokens;
+using NS2Nexus.Server.BLL.Interfaces;
 using NS2Nexus.Server.DAL.Interfaces;
 using NS2Nexus.Server.DAL.Repositories;
 using NS2Nexus.Server.Helpers;
@@ -14,13 +18,14 @@ namespace NS2Nexus.Server.BLL.Logic
         private readonly IEntityBaseRepository<Player> _playerRepository;
         private readonly IEntityBaseRepository<PlayerStats> _playerStatsRepository;
         private readonly IEntityBaseRepository<ClassPlaytime> _classPlaytimeRepository;
-        public PlayerLogic(IEntityBaseRepository<Player> playerRepository, IEntityBaseRepository<PlayerStats> playerStatsRepository, IEntityBaseRepository<ClassPlaytime> classPlaytimeRepository, IEntityBaseRepository<RoundPlayerStats> roundPlayerStatsRepository, IEntityBaseRepository<KillFeed> killFeedRepository, ILogger<PlayerLogic> logger)
+        private readonly IEntityBaseRepository<RoundPlayerStats> _roundPlayerStatsRepository;
+        public PlayerLogic(IEntityBaseRepository<Player> playerRepository, IEntityBaseRepository<PlayerStats> playerStatsRepository, IEntityBaseRepository<ClassPlaytime> classPlaytimeRepository, IEntityBaseRepository<RoundPlayerStats> roundPlayerStatsRepository, ILogger<PlayerLogic> logger)
         {
             _playerRepository = playerRepository;
             _playerStatsRepository = playerStatsRepository;
             _classPlaytimeRepository = classPlaytimeRepository;
+            _roundPlayerStatsRepository = roundPlayerStatsRepository;
             this._logger = logger;
-            PlayerParseHelper.ParsePlayer();
         }
 
         // <------------ PLAYERS ------------> //
@@ -62,24 +67,6 @@ namespace NS2Nexus.Server.BLL.Logic
             catch (Exception ex)
             {
                 throw new Exception("Failed to fetch Player. Please try again later.");
-            }
-        }
-
-        public Player CreatePlayer(Player newPlayer)
-        {
-            try
-            {
-                var existingPlayer = _playerRepository.GetSingle(newPlayer.Id);
-                if (existingPlayer == null)
-                {
-                    _playerRepository.Add(newPlayer);
-                    return newPlayer;
-                }
-                throw new Exception("This Player already exists.");
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Failed to create Player. Please try again later.");
             }
         }
         public Player EditPlayer(Player editedPlayer)
@@ -128,34 +115,21 @@ namespace NS2Nexus.Server.BLL.Logic
                 throw new Exception("Failed to fetch PlayerStats. Please try again later.");
             }
         }
-        public PlayerStats CreatePlayerStats(PlayerStats newPlayerStats)
-        {
-            try
-            {
-                var existingPlayerStats = _playerStatsRepository.GetSingle(newPlayerStats.PlayerId);
-                if (existingPlayerStats == null)
-                {
-                    _playerStatsRepository.Add(newPlayerStats);
-                    return newPlayerStats;
-                }
-                throw new Exception("This Player Stats already exists.");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-                throw new Exception("Failed to create Player Stats. Please try again later.");
-            }
-        }
         public PlayerStats EditPlayerStats(int playerId, PlayerStats editedPlayerStats)
         {
             try
             {
                 var playerStats = _playerStatsRepository.SingleFindBy(p => p.PlayerId == playerId);
 
-                playerStats.MarineAccuracy = editedPlayerStats.MarineAccuracy;
-                playerStats.AlienAccuracy = editedPlayerStats.AlienAccuracy;
-                playerStats.MarineKdr = editedPlayerStats.MarineKdr;
-                playerStats.AlienKdr = editedPlayerStats.AlienKdr;
+                playerStats.MarineHits = editedPlayerStats.MarineHits;
+                playerStats.MarineOnosHits = editedPlayerStats.MarineOnosHits;
+                playerStats.MarineMisses = editedPlayerStats.MarineMisses;
+                playerStats.AlienHits = editedPlayerStats.AlienHits;
+                playerStats.AlienMisses = editedPlayerStats.AlienMisses;
+                playerStats.MarineKills = editedPlayerStats.MarineKills;
+                playerStats.MarineDeaths = editedPlayerStats.MarineDeaths;
+                playerStats.AlienKills = editedPlayerStats.AlienKills;
+                playerStats.AlienDeaths = editedPlayerStats.AlienDeaths;
                 playerStats.CommanderSkill = editedPlayerStats.CommanderSkill;
                 playerStats.CommanderSkillMarine = editedPlayerStats.CommanderSkillMarine;
                 playerStats.CommanderSkillAlien = editedPlayerStats.CommanderSkillAlien;
@@ -223,6 +197,44 @@ namespace NS2Nexus.Server.BLL.Logic
                 throw new Exception("Failed to edit Class Playtime. Please try again later.");
             }
         }
-        
+
+        // <------------ ROUND PLAYER STATS ------------> //
+
+        public IEnumerable<RoundPlayerStats> GetAllStatsInRound(int roundId)
+        {
+            try
+            {
+                var roundPlayerStats = _roundPlayerStatsRepository.FindBy(rps => rps.RoundId == roundId);
+                return roundPlayerStats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Players Stats in Round. Please try again later.");
+            }
+        }
+        public IEnumerable<RoundPlayerStats> GetAllStatsByPlayer(int playerId)
+        {
+            try
+            {
+                var roundPlayerStats = _roundPlayerStatsRepository.FindBy(rps => rps.PlayerId == playerId);
+                return roundPlayerStats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Round Player Stats. Please try again later");
+            }
+        }
+        public RoundPlayerStats GetRoundPlayerStats(int roundId, int playerId)
+        {
+            try
+            {
+                var roundPlayerStats = _roundPlayerStatsRepository.SingleFindBy(rps => rps.PlayerId == playerId && rps.RoundId == roundId);
+                return roundPlayerStats;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Failed to fetch Round Player Stats. Please try again later");
+            }
+        }
     }
 }

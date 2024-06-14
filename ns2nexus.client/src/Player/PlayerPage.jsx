@@ -32,18 +32,19 @@ export default function PlayerPage() {
         const fetchData = async () => {
             try {
                 const playerResponse = await axios.get(`https://localhost:7105/api/players/steamid/${playerId}`);
-                setPlayer(playerResponse.data);
+                const fetchedPlayer = playerResponse.data;
+                setPlayer(fetchedPlayer);
 
-                const statsResponse = await axios.get(`https://localhost:7105/api/stats/${playerResponse.data.id}`);
+                const statsResponse = await axios.get(`https://localhost:7105/api/stats/${fetchedPlayer.id}`);
                 setPlayerStats(statsResponse.data);
 
-                const classPlaytimeResponse = await axios.get(`https://localhost:7105/api/playtime/${playerResponse.data.id}`);
+                const classPlaytimeResponse = await axios.get(`https://localhost:7105/api/playtime/${fetchedPlayer.id}`);
                 setClassPlaytime(classPlaytimeResponse.data);
 
-                const rpsResponse = await axios.get(`https://localhost:7105/api/roundPlayerStats/${playerResponse.data.id}`);
+                const rpsResponse = await axios.get(`https://localhost:7105/api/rps/${fetchedPlayer.id}`);
                 setRoundPlayerStats(rpsResponse.data);
 
-                const roundResponse = await axios.get(`https://localhost:7105/api/rounds/player/${playerResponse.data.id}`); 
+                const roundResponse = await axios.get(`https://localhost:7105/api/rounds/player/${fetchedPlayer.id}`);;
                 setRounds(roundResponse.data);
             } catch (error) {
                 console.error(`Error fetching player with ID ${playerId}:`, error);
@@ -60,9 +61,11 @@ export default function PlayerPage() {
         };
     }, []);
 
-    if (!player || !playerStats || !rounds) {
+    if (!player || !playerStats || !rounds || !roundPlayerStats) {
         return <Grid>Loading...</Grid>;
     }
+
+    //console.log(`Player: ${player}\nStats: ${playerStats}\nRPS: ${roundPlayerStats}\nRounds: ${rounds}\nClassPlaytime: ${classPlaytime}\nPlayer Id: ${player.id}`)
 
     return (
         <Grid sx={{
@@ -88,7 +91,7 @@ export default function PlayerPage() {
 
             <PlayerPerformance playerStats={playerStats} />
             <PlayerStats playerStats={roundPlayerStats} playerRounds={rounds.$values} playerClassPlaytime={classPlaytime.$values} />
-            <RoundList rounds={rounds.$values} />
+            <RoundList rounds={rounds.$values} roundPlayerStats={roundPlayerStats} />
         </Grid>
     );
 

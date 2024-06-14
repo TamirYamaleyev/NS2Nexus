@@ -12,28 +12,30 @@ function PlayerInfo({ player, toggleDropdown, dropDownOpen, dropdownRef }) {
                 position: 'relative',
                 marginBottom: '20px',
                 padding: '20px',
-                backgroundColor: '#141414',
                 borderRadius: '15px',
             }}
         >
-            {player.profilePictureUrl && (
-                <Grid style={{ display: 'flex', alignItems: 'center' }}>
-                    <Grid style={{ width: '150px', marginRight: '10px' }}>
+            
+            <Grid style={{ display: 'flex', alignItems: 'center' }}>
+                <Grid style={{ width: '150px', marginRight: '10px' }}>
+                    {(player.profilePictureUrl &&
                         <img src={player.profilePictureUrl} alt={player.name} style={{ width: '100%', border: '5px solid white', borderRadius: '5%' }} />
-                    </Grid>
-                    <Grid>
-                        <p style={{ margin: 20 }}>
-                            <span style={{
-                                background: `linear-gradient(90deg, #F0A968, #9B3613)`,
-                                WebkitBackgroundClip: 'text',
-                                color: 'transparent',
-                                fontWeight: '700',
-                                fontSize: '38px'
-                            }}>{player.playerName}</span>
-                        </p>
-                    </Grid>
+                    )}
                 </Grid>
-            )}
+                <Grid>
+                    <p style={{ margin: 20 }}>
+                        <span style={{
+                            background: `linear-gradient(90deg, #F0A968, #9B3613)`,
+                            WebkitBackgroundClip: 'text',
+                            color: 'transparent',
+                            fontWeight: '700',
+                            fontSize: '38px',
+                            fontFamily: 'roboto'
+                        }}>{player.playerName}</span>
+                    </p>
+                </Grid>
+            </Grid>
+            
 
             <Grid style={{ position: 'absolute', top: '10px', right: '10px' }}>
                 <Grid ref={dropdownRef} style={{ width: '4rem', height: '4rem', position: 'relative' }}>

@@ -1,7 +1,9 @@
 ﻿using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using NS2Nexus.Server.DAL.Interfaces;
 using NS2Nexus.Server.Models;
+using System.Data;
 using System.Linq.Expressions;
 
 namespace NS2Nexus.Server.DAL.Repositories
@@ -64,5 +66,27 @@ namespace NS2Nexus.Server.DAL.Repositories
             _context.Entry(entity).State = EntityState.Modified;
             return _context.SaveChanges() > 0;
         }
+        public void ExecuteSqlCommand(string sql,  params object[] args)
+        {
+            _context.Database.ExecuteSqlRaw(sql, args);
+        }
+        public IDbContextTransaction BeginTransaction(IsolationLevel isolationLevel = IsolationLevel.ReadCommitted)
+        {
+            return _context.Database.BeginTransaction(isolationLevel);
+        }
+
+
+        //public void DeleteAll()
+        //{
+        //    var tableName = _context.Model.FindEntityType(typeof(T)).GetTableName();
+
+        //    _context.Database.ExecuteSqlRaw($"ALTER TABLE {tableName} NOCHECK CONSTRAINT ALL");
+
+        //    _context.Database.ExecuteSqlRaw($"DELETE FROM {tableName}");
+
+        //    _context.Database.ExecuteSqlRaw($"ALTER TABLE {tableName} CHECK CONSTRAINT ALL");
+
+        //    if (tableName == "roundPlayerStats") _context.Database.ExecuteSqlRaw($"DBCC CHECKIDENT ('{tableName}', RESEED, 0)");
+        //}
     }
 }

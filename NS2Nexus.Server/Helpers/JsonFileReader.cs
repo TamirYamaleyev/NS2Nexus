@@ -1,29 +1,37 @@
 ﻿using Newtonsoft.Json.Linq;
-using NS2Nexus.Server.Models;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace NS2Nexus.Server.Helpers
 {
     public class JsonFileReader
     {
-        public List<JToken> ExtractJsonData(string jsonDirectory, string node)
+        public List<JToken> ExtractJsonData(string jsonFilePath)
         {
             List<JToken> parsedJsonObjects = new List<JToken>();
 
-            // Iterate through each JSON file in the directory
-            foreach (var filePath in Directory.GetFiles(jsonDirectory, "*.json"))
+            try
             {
                 // Read the JSON file
-                var jsonContent = File.ReadAllText(filePath);
+                var jsonContent = File.ReadAllText(jsonFilePath);
 
-                // Parse the JSON content
-                var parsedJsonObject = JObject.Parse(jsonContent).SelectToken($"$..{node}");
-
-                if (parsedJsonObject != null)
+                if (!string.IsNullOrWhiteSpace(jsonContent))
                 {
-                    // Extract and save player data from the JSON object
+                    // Parse the entire JSON content
+                    var parsedJsonObject = JObject.Parse(jsonContent);
+
+                    // Add the parsed JSON object to the list
                     parsedJsonObjects.Add(parsedJsonObject);
                 }
             }
+            catch (Exception ex)
+            {
+                // Handle any exceptions while reading or parsing the JSON file
+                Console.WriteLine($"Error processing file '{jsonFilePath}': {ex.Message}");
+                // Optionally, you can choose to log the error or take other appropriate actions
+            }
+
             return parsedJsonObjects;
         }
     }

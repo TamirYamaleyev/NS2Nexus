@@ -33,6 +33,7 @@ namespace NS2Nexus.Server
             builder.Services.AddScoped<IUserLogic, UserLogic>();
             builder.Services.AddScoped<IPlayerLogic, PlayerLogic>();
             builder.Services.AddScoped<IRoundLogic, RoundLogic>();
+            builder.Services.AddScoped<IDataLoadLogic, DataLoadLogic>();
             builder.Services.AddScoped<IEntityBaseRepository<User>, EntityBaseRepository<User>>();
             builder.Services.AddScoped<IEntityBaseRepository<Player>, EntityBaseRepository<Player>>();
             builder.Services.AddScoped<IEntityBaseRepository<PlayerStats>, EntityBaseRepository<PlayerStats>>();
