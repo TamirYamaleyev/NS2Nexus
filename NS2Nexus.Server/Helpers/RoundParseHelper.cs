@@ -1,5 +1,4 @@
-﻿using dotenv.net;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json.Linq;
 using NS2Nexus.Server.BLL.Interfaces;
@@ -15,8 +14,6 @@ namespace NS2Nexus.Server.Helpers
     {
         public static (List<Player>, List<PlayerStats>, List<RoundPlayerStats>, List<RoundInfo>) ParseFiles()
         {
-            DotEnv.Load();
-
             string pathToJson = "NS2NexusRounds";
 
             JsonFileReader reader = new JsonFileReader();// Extract JSON data from each file in the directory
